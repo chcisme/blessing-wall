@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>祝福牆示範</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial; margin: 24px; }
+    header { display:flex; justify-content:space-between; align-items:baseline; gap: 16px; }
+    h1 { margin: 0 0 12px 0; font-size: 22px; }
+    .meta { color:#666; font-size: 13px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+    .card { border:1px solid #ddd; border-radius: 12px; padding: 12px 14px; background:#fff; }
+    .msg { font-size: 16px; line-height: 1.5; margin: 0 0 10px 0; }
+    .ts { color:#777; font-size: 12px; }
+    .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>祝福牆（Demo）</h1>
+      <div class="meta">每 5 秒更新一次，顯示最新 30 則（需審核者僅顯示 approved=TRUE）</div>
+    </div>
+    <div class="meta" id="status">初始化…</div>
+  </header>
+
+  <div id="error" class="error" style="display:none;"></div>
+  <section id="grid" class="grid"></section>
+
+<script>
+  // TODO: 換成你的 Apps Script Web App URL
+  const API_URL = "https://script.google.com/macros/s/AKfycbyPCsIk2yU8bGU-UXqRwD6U3UDsg19k6qKCurgLxDcvnr1KOQfOUD893E-pTVb6W2wl/exec";
+  const REFRESH_MS = 5000;
+
+  const grid = document.getElementById('grid');
+  const statusEl = document.getElementById('status');
+  const errorEl = document.getElementById('error');
+
+  function fmtTime(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return d.toLocaleString('zh-TW', { hour12: false });
+  }
+
+  function render(items) {
+    grid.innerHTML = '';
+    for (const it of items) {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const p = document.createElement('p');
+      p.className = 'msg';
+      p.textContent = it.message;
+
+      const ts = document.createElement('div');
+      ts.className = 'ts';
+      ts.textContent = it.timestamp ? fmtTime(it.timestamp) : '';
+
+      card.appendChild(p);
+      card.appendChild(ts);
+      grid.appendChild(card);
+    }
+  }
+
+  async function refresh() {
+    try {
+      statusEl.textContent = '更新中…';
+      errorEl.style.display = 'none';
+      const res = await fetch(API_URL, { cache: "no-store" });
+      const data = await res.json();
+
+      if (!data.ok) throw new Error(data.error || 'API returned ok=false');
+
+      render(data.items || []);
+      statusEl.textContent = `最後更新：${new Date().toLocaleTimeString('zh-TW', { hour12: false })}`;
+    } catch (err) {
+      errorEl.style.display = 'block';
+      errorEl.textContent = '載入失敗：\n' + String(err);
+      statusEl.textContent = '更新失敗';
+    }
+  }
+
+  refresh();
+  setInterval(refresh, REFRESH_MS);
+</script>
+</body>
+</html>
