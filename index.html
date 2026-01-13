@@ -10,9 +10,85 @@
     h1 { margin: 0 0 12px 0; font-size: 22px; }
     .meta { color:#666; font-size: 13px; }
     .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+    /* 統一繪馬色調（可調） */
+:root{
+  --ema-wood-1: #f3d3a2;
+  --ema-wood-2: #e9c28b;
+  --ema-border: #c79a5b;
+  --ema-ink: #3b2a1a;
+}
+
+/* 繪馬卡片本體 */
+.ema{
+  position: relative;
+  padding: 16px 16px 14px 16px;
+  border: 1px solid var(--ema-border);
+  border-radius: 14px;
+  background:
+    /* 木紋：用漸層模擬 */
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.10) 0px,
+      rgba(255,255,255,0.10) 6px,
+      rgba(0,0,0,0.03) 10px,
+      rgba(0,0,0,0.03) 16px
+    ),
+    linear-gradient(180deg, var(--ema-wood-1), var(--ema-wood-2));
+  color: var(--ema-ink);
+
+  /* 視覺厚度 */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* 繪馬上緣：用 clip-path 做出「上窄下寬」輪廓 */
+.ema{
+  clip-path: polygon(
+    10% 0%,
+    90% 0%,
+    100% 16%,
+    100% 100%,
+    0% 100%,
+    0% 16%
+  );
+}
+
+/* 繪馬繩孔 */
+.ema::before{
+  content:"";
+  position:absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 10px;
+  border: 2px solid rgba(59,42,26,0.35);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* 小繩子（可選） */
+.ema::after{
+  content:"";
+  position:absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 18px;
+  border-top: 2px solid rgba(59,42,26,0.25);
+  border-left: 2px solid rgba(59,42,26,0.25);
+  border-right: 2px solid rgba(59,42,26,0.25);
+  border-radius: 0 0 18px 18px;
+  opacity: 0.35;
+}
+
+/* 內容排版（沿用你原本的 class） */
+.ema .name{ font-weight: 700; margin: 18px 0 8px 0; }
+.ema .msg{ margin: 0 0 12px 0; font-size: 16px; line-height: 1.6; }
+.ema .ts{ color: rgba(59,42,26,0.65); font-size: 12px; }
     .card { border:1px solid #ddd; border-radius: 12px; padding: 12px 14px; background:#fff; }
     .name { font-weight: 600; margin: 0 0 6px 0; }
-    .msg { margin: 0 0 10px 0; font-size: 16px; line-height: 1.5; }
+    .msg { margin: 0 0 10px 0; font-size: 16px; line-height: 1.5; letter-spacing: 0.2px; }
     .ts  { color:#777; font-size: 12px; }
     .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
   </style>
@@ -49,7 +125,7 @@
   grid.innerHTML = '';
   for (const it of items) {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'ema';
 
     const nameEl = document.createElement('div');
     nameEl.className = 'name';
@@ -94,5 +170,6 @@
 </script>
 </body>
 </html>
+
 
 
