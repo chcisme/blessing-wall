@@ -23,7 +23,7 @@
   --ema-wood-2:#e7bf86;
   --ema-border:#c79a5b;
   --ema-ink:#2f2318;
-  --ema-stamp:#c62828; /* 紅色印章 */
+  --ema-stamp:#c62828;
 }
 
 /* 繪馬本體 */
@@ -34,7 +34,6 @@
   border-radius: 14px;
   color: var(--ema-ink);
 
-  /* 木紋：疊兩層漸層，做出自然木紋感 */
   background:
     radial-gradient(120px 80px at 20% 30%, rgba(255,255,255,0.20), rgba(255,255,255,0.00) 60%),
     repeating-linear-gradient(
@@ -47,10 +46,8 @@
     linear-gradient(180deg, var(--ema-wood-1), var(--ema-wood-2));
 
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
 
-/* 繪馬輪廓：上緣斜切（更像） */
-.ema{
+  /* 上窄下寬的繪馬輪廓 */
   clip-path: polygon(
     12% 0%,
     88% 0%,
@@ -65,7 +62,7 @@
 .ema::before{
   content:"";
   position:absolute;
-  top: 10px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   width: 22px;
@@ -73,18 +70,36 @@
   border: 2px solid rgba(47,35,24,0.35);
   border-radius: 999px;
   background: rgba(255,255,255,0.18);
+  z-index: 2;
 }
 
-/* 紅色印章（右下角） */
+/* 紅色繩子（弧形） */
 .ema::after{
-  content:"祈願";
+  content:"";
+  position:absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54px;
+  height: 20px;
+
+  border-top: 3px solid var(--ema-stamp);
+  border-left: 3px solid var(--ema-stamp);
+  border-right: 3px solid var(--ema-stamp);
+  border-radius: 0 0 28px 28px;
+
+  opacity: 0.95;
+  z-index: 1;
+}
+
+/* 紅色印章（改成 HTML 元素，不和 ::after 衝突） */
+.ema .stamp{
   position:absolute;
   right: 12px;
   bottom: 12px;
-  filter: saturate(1.1) contrast(1.05);
 
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -99,12 +114,11 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 
-  /* 讓印章像蓋上去一點點不完美 */
   transform: rotate(-6deg);
-  opacity: 0.95;
+  z-index: 3;
 }
 
-/* 內容排版：預留上方繩孔空間 */
+/* 內容排版：預留繩孔空間 */
 .ema .name{
   font-weight: 700;
   margin: 18px 0 8px 0;
@@ -120,6 +134,7 @@
   color: rgba(47,35,24,0.65);
   font-size: 12px;
 }
+
 
 
 /* 內容排版（沿用你原本的 class） */
@@ -179,13 +194,20 @@
     tsEl.className = 'ts';
     tsEl.textContent = it.timestamp ? fmtTime(it.timestamp) : '';
 
+    // ✅ 印章（不和紅繩/繩孔衝突）
+    const stampEl = document.createElement('div');
+    stampEl.className = 'stamp';
+    stampEl.textContent = '奉納'; // 你也可以改成 祈願/NTU/圖書館
+
     card.appendChild(nameEl);
     card.appendChild(msgEl);
     card.appendChild(tsEl);
+    card.appendChild(stampEl);
 
     grid.appendChild(card);
-    }
   }
+}
+
 
   async function refresh() {
     try {
@@ -210,6 +232,7 @@
 </script>
 </body>
 </html>
+
 
 
 
