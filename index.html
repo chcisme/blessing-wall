@@ -11,8 +11,9 @@
     .meta { color:#666; font-size: 13px; }
     .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
     .card { border:1px solid #ddd; border-radius: 12px; padding: 12px 14px; background:#fff; }
-    .msg { font-size: 16px; line-height: 1.5; margin: 0 0 10px 0; }
-    .ts { color:#777; font-size: 12px; }
+    .name { font-weight: 600; margin: 0 0 6px 0; }
+.msg { margin: 0 0 10px 0; font-size: 16px; line-height: 1.5; }
+.ts  { color:#777; font-size: 12px; }
     .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
   </style>
 </head>
@@ -37,29 +38,36 @@
   const statusEl = document.getElementById('status');
   const errorEl = document.getElementById('error');
 
-  function fmtTime(iso) {
-    if (!iso) return '';
-    const d = new Date(iso);
-    return d.toLocaleString('zh-TW', { hour12: false });
+  function fmtTime(v) {
+  if (!v) return '';
+  const d = new Date(v);
+  if (isNaN(d.getTime())) return String(v);
+  return d.toLocaleString('zh-TW', { hour12: false });
   }
 
   function render(items) {
-    grid.innerHTML = '';
-    for (const it of items) {
-      const card = document.createElement('div');
-      card.className = 'card';
+  grid.innerHTML = '';
+  for (const it of items) {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-      const p = document.createElement('p');
-      p.className = 'msg';
-      p.textContent = it.message;
+    const nameEl = document.createElement('div');
+    nameEl.className = 'name';
+    nameEl.textContent = it.name ? it.name : '匿名';
 
-      const ts = document.createElement('div');
-      ts.className = 'ts';
-      ts.textContent = it.timestamp ? fmtTime(it.timestamp) : '';
+    const msgEl = document.createElement('p');
+    msgEl.className = 'msg';
+    msgEl.textContent = it.message;
 
-      card.appendChild(p);
-      card.appendChild(ts);
-      grid.appendChild(card);
+    const tsEl = document.createElement('div');
+    tsEl.className = 'ts';
+    tsEl.textContent = it.timestamp ? fmtTime(it.timestamp) : '';
+
+    card.appendChild(nameEl);
+    card.appendChild(msgEl);
+    card.appendChild(tsEl);
+
+    grid.appendChild(card);
     }
   }
 
@@ -86,3 +94,4 @@
 </script>
 </body>
 </html>
+
