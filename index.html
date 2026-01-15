@@ -5,11 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>【醫圖WBC應援板】</title>
   <style>
-    body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial; margin: 24px; }
-    header { display:flex; justify-content:space-between; align-items:baseline; gap: 16px; }
-    h1 { margin: 0 0 12px 0; font-size: 22px; }
-    .meta { color:#666; font-size: 13px; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+   body {
+  font-family: system-ui, -apple-system, "Noto Sans TC", Arial;
+  margin: 24px;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url("assets/stadium.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
     /* 統一繪馬色調（可調） */
 :root{
   --ema-wood-1: #f3d3a2;
@@ -227,6 +236,7 @@
 </script>
 </body>
 </html>
+
 
 
 
