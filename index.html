@@ -113,24 +113,6 @@ header {
   z-index: 2;
 }
 
-/* 紅色繩子（弧形） */
-.ema::after{
-  content:"";
-  position:absolute;
-  top: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 54px;
-  height: 20px;
-
-  border-top: 3px solid var(--ema-stamp);
-  border-left: 3px solid var(--ema-stamp);
-  border-right: 3px solid var(--ema-stamp);
-  border-radius: 0 0 28px 28px;
-
-  opacity: 0.95;
-  z-index: 1;
-}
 
 /* 右下角圖片章（棒球圖片） */
 .ema .stamp{
@@ -190,12 +172,6 @@ header {
     0 10px 18px rgba(0,0,0,0.20),
     0 2px 6px rgba(0,0,0,0.12);
     }
-
-/* ❌ 完全移除繪馬上方紅繩（::after） */
-.ema::after {
-  content: none !important;
-}
-
       
   </style>
 </head>
@@ -280,6 +256,7 @@ stampEl.alt = 'baseball';
 </script>
 </body>
 </html>
+
 
 
 
