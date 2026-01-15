@@ -7,13 +7,6 @@
   <style>
   body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial;
   margin: 24px;
-
-  /* 標題白字+陰影 */
-  h1 {
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  }
-        
         
   /* 棒球場背景＋淡化遮罩 */
   background-image:
@@ -36,6 +29,27 @@
     .ts { color:#777; font-size: 12px; }
     .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
 
+ /* 標題白字+陰影 */
+  h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+  /* ===== Header ===== */
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap: 16px;
+}
+
+/* 副標與狀態 */
+.meta,
+#status {
+  color: #ffffff;
+  font-size: 13px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+    
     /* 統一繪馬色調（可調） */
 :root{
   --ema-wood-1: #f3d3a2;
@@ -176,16 +190,7 @@
     0 10px 18px rgba(0,0,0,0.20),
     0 2px 6px rgba(0,0,0,0.12);
     }
-
-/* 副標與右上角狀態文字 → 白字＋陰影 */
-.meta,
-#status {
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-}
-
-
-      
+     
   </style>
 </head>
 <body>
@@ -269,6 +274,7 @@ stampEl.alt = 'baseball';
 </script>
 </body>
 </html>
+
 
 
 
