@@ -5,7 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>【醫圖WBC應援板】</title>
   <style>
-  body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial; margin: 24px; }
+  body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial;
+  margin: 24px;
+
+  /* 棒球場背景＋淡化遮罩 */
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0.55),
+      rgba(0,0,0,0.55)
+    ),
+    url("assets/stadium.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat; }
     header { display:flex; justify-content:space-between; align-items:baseline; gap: 16px; }
     h1 { margin: 0 0 12px 0; font-size: 22px; }
     .meta { color:#666; font-size: 13px; }
@@ -151,6 +165,19 @@
     .msg { margin: 0 0 10px 0; font-size: 16px; line-height: 1.5; letter-spacing: 0.2px; }
     .ts  { color:#777; font-size: 12px; }
     .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
+    .ema {
+  box-shadow:
+    0 10px 18px rgba(0,0,0,0.20),
+    0 2px 6px rgba(0,0,0,0.12);
+      
+/* 🔧 加強繪馬立體感（覆蓋前面的 box-shadow） */
+.ema {
+  box-shadow:
+    0 10px 18px rgba(0,0,0,0.20),
+    0 2px 6px rgba(0,0,0,0.12);
+    
+    
+    }
   </style>
 </head>
 <body>
@@ -232,6 +259,7 @@
 </script>
 </body>
 </html>
+
 
 
 
