@@ -5,19 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>【醫圖WBC應援板】</title>
   <style>
-   body {
-  font-family: system-ui, -apple-system, "Noto Sans TC", Arial;
-  margin: 24px;
-
-  background-image:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url("assets/stadium.jpg");
-
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
+  body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial; margin: 24px; }
+    header { display:flex; justify-content:space-between; align-items:baseline; gap: 16px; }
+    h1 { margin: 0 0 12px 0; font-size: 22px; }
+    .meta { color:#666; font-size: 13px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+    .card { border:1px solid #ddd; border-radius: 12px; padding: 12px 14px; background:#fff; }
+    .msg { font-size: 16px; line-height: 1.5; margin: 0 0 10px 0; }
+    .ts { color:#777; font-size: 12px; }
+    .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
 
     /* 統一繪馬色調（可調） */
 :root{
@@ -236,6 +232,7 @@
 </script>
 </body>
 </html>
+
 
 
 
