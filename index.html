@@ -98,20 +98,30 @@ header {
   );
 }
 
-/* 繩孔 */
+/* 繪馬上方置中的棒球手套圖樣（取代繩孔） */
 .ema::before{
   content:"";
-  position:absolute;
-  top: 12px;
+  position: absolute;
+  top: 8px;               /* 你要更靠上/靠下就改這裡 */
   left: 50%;
   transform: translateX(-50%);
-  width: 22px;
-  height: 12px;
-  border: 2px solid rgba(47,35,24,0.35);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.18);
-  z-index: 2;
+
+  width: 52px;            /* 圖示大小 */
+  height: 52px;
+
+  background-image: url("assets/glove.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* 讓它像貼在木牌上、有立體感 */
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));
+  opacity: 0.95;
+
+  pointer-events: none;
+  z-index: 3;
 }
+
 
 
 /* 右下角圖片章（棒球圖片） */
@@ -137,6 +147,7 @@ header {
 .ema .name{
   font-weight: 700;
   margin: 18px 0 8px 0;
+  margin-top: 64px;   /* 原本約 18px，改大讓文字往下 */
 }
 
 .ema .msg{
@@ -256,6 +267,7 @@ stampEl.alt = 'baseball';
 </script>
 </body>
 </html>
+
 
 
 
