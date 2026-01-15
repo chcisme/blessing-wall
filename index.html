@@ -176,7 +176,7 @@
   return d.toLocaleString('zh-TW', { hour12: false });
   }
 
-  function render(items) {
+ function render(items) {
   grid.innerHTML = '';
   for (const it of items) {
     const card = document.createElement('div');
@@ -184,29 +184,24 @@
 
     const nameEl = document.createElement('div');
     nameEl.className = 'name';
-    nameEl.textContent = it.name ? it.name : '匿名';
+    nameEl.textContent = it.nickname ? it.nickname : '匿名';
 
     const msgEl = document.createElement('p');
     msgEl.className = 'msg';
     msgEl.textContent = it.message;
 
-    const tsEl = document.createElement('div');
-    tsEl.className = 'ts';
-    tsEl.textContent = it.timestamp ? fmtTime(it.timestamp) : '';
-
-    // ✅ 印章（不和紅繩/繩孔衝突）
     const stampEl = document.createElement('div');
     stampEl.className = 'stamp';
-    stampEl.textContent = '奉納'; // 你也可以改成 祈願/NTU/圖書館
+    stampEl.textContent = '奉納';
 
     card.appendChild(nameEl);
     card.appendChild(msgEl);
-    card.appendChild(tsEl);
     card.appendChild(stampEl);
 
     grid.appendChild(card);
   }
 }
+
 
 
   async function refresh() {
@@ -232,6 +227,7 @@
 </script>
 </body>
 </html>
+
 
 
 
