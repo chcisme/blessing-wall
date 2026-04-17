@@ -4,192 +4,144 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>【畢業季活動】</title>
+
   <style>
-  body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial;
-  margin: 24px;
-        
-  /* 背景＋淡化遮罩 */
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,0.15),
-      rgba(0,0,0,0.15)
-    ),
-    url("assets/background.jpg");
-
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  background-repeat: no-repeat; }
-    header { display:flex; justify-content:space-between; align-items:baseline; gap: 16px; }
-    h1 { margin: 0 0 12px 0; font-size: 22px; }
-    .meta { color:#666; font-size: 13px; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 130px; }
-    .card { border:1px solid #ddd; border-radius: 12px; padding: 12px 14px; background:#fff; }
-    .msg { font-size: 16px; line-height: 1.5; margin: 0 0 10px 0; }
-    .ts { color:#777; font-size: 12px; }
-    .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
-
- /* 標題白字+陰影 */
-  h1 {
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  }
-  /* ===== Header ===== */
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  gap: 16px;
-}
-
-/* 副標與狀態 */
-.meta,
-#status {
-  color: #ffffff;
-  font-size: 13px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  margin-bottom: 100px;
-}
-    
-    /* 統一繪馬色調（可調） */
-:root{
-  --ema-wood-1: #f3d3a2;
-  --ema-wood-2: #e9c28b;
-  --ema-border: #c79a5b;
-  --ema-ink: #3b2a1a;
-}
-
-:root{
-  --ema-wood-1:#f4d7ad;
-  --ema-wood-2:#e7bf86;
-  --ema-border:#c79a5b;
-  --ema-ink:#2f2318;
-  --ema-stamp:#c62828;
-}
-
-/* 繪馬本體 */
-.ema{
-  position: relative;
-  padding: 18px 16px 14px 16px;
-  border: 1px solid var(--ema-border);
-  border-radius: 14px;
-  color: var(--ema-ink);
-
-  background:
-    radial-gradient(120px 80px at 20% 30%, rgba(255,255,255,0.20), rgba(255,255,255,0.00) 60%),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,0.10) 0px,
-      rgba(255,255,255,0.10) 7px,
-      rgba(0,0,0,0.03) 11px,
-      rgba(0,0,0,0.03) 18px
-    ),
-    linear-gradient(180deg, var(--ema-wood-1), var(--ema-wood-2));
-
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-
-  /* 上窄下寬的繪馬輪廓 */
-  clip-path: polygon(
-    12% 0%,
-    88% 0%,
-    100% 16%,
-    100% 100%,
-    0% 100%,
-    0% 16%
-  );
-}
-
-/* 繪馬上方置中的圖片（取代繩孔） */
-.ema::before{
-  content:"";
-  position: absolute;
-  top: 3px;               /* 你要更靠上/靠下就改這裡 */
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: 80px;            /* 圖示大小 */
-  height: 80px;
-
-  background-image: url("assets/bear.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  /* 讓它像貼在木牌上、有立體感 */
-  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));
-  opacity: 0.95;
-
-  pointer-events: none;
-  z-index: 3;
-}
-
-
-
-/* 右下角圖片章 */
-.ema .stamp{
-  position: absolute;
-  right: 6px;
-  bottom: 6px;
-
-  width: 100px;
-  height: 100px;
-
-  object-fit: contain;
-  pointer-events: none;
-
-  /* 讓它看起來像貼在繪馬上 */
-  transform: rotate(-8deg);
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
-}
-
-
-
-/* 內容排版：預留繩孔空間 */
-.ema .name{
-  font-weight: 700;
-  margin: 18px 0 8px 0;
-  margin-top: 64px;   /* 原本約 18px，改大讓文字往下 */
-}
-
-.ema .msg{
-  margin: 0 0 14px 0;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.ema .ts{
-  color: rgba(47,35,24,0.65);
-  font-size: 12px;
-}
-
-
-
-/* 內容排版（沿用你原本的 class） */
-.ema .name{ font-weight: 700; margin: 18px 0 8px 0; }
-.ema .msg{ margin: 0 0 12px 0; font-size: 16px; line-height: 1.6; }
-.ema .ts{ color: rgba(59,42,26,0.65); font-size: 12px; }
-    .card { border:1px solid #ddd; border-radius: 12px; padding: 12px 14px; background:#fff; }
-    .name { font-weight: 600; margin: 0 0 6px 0; }
-    .msg { margin: 0 0 10px 0; font-size: 16px; line-height: 1.5; letter-spacing: 0.2px; }
-    .ts  { color:#777; font-size: 12px; }
-    .error { color:#b00020; margin-top: 12px; white-space: pre-wrap; }
-    .ema {
-  box-shadow:
-    0 10px 18px rgba(0,0,0,0.20),
-    0 2px 6px rgba(0,0,0,0.12);
-      
-/* 🔧 加強繪馬立體感（覆蓋前面的 box-shadow） */
-.ema {
-  box-shadow:
-    0 10px 18px rgba(0,0,0,0.20),
-    0 2px 6px rgba(0,0,0,0.12);
+    body {
+      font-family: system-ui, -apple-system, "Noto Sans TC", Arial;
+      margin: 24px;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
+        url("assets/background.jpg");
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
     }
-.ema::before {
-  display: none !important;
-}
-      
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 22px;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    .meta,
+    #status {
+      color: #ffffff;
+      font-size: 13px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 130px;
+    }
+
+    .error {
+      color: #b00020;
+      margin-top: 12px;
+      white-space: pre-wrap;
+    }
+
+    :root {
+      --ema-wood-1: #f4d7ad;
+      --ema-wood-2: #e7bf86;
+      --ema-border: #c79a5b;
+      --ema-ink: #2f2318;
+    }
+
+    .ema {
+      position: relative;
+      padding: 18px 16px 14px 16px;
+      height: 220px;           /* ✅ 固定高度 */
+      overflow: hidden;        /* ✅ 超出隱藏 */
+      border: 1px solid var(--ema-border);
+      border-radius: 14px;
+      color: var(--ema-ink);
+
+      background:
+        radial-gradient(120px 80px at 20% 30%, rgba(255,255,255,0.20), rgba(255,255,255,0.00) 60%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.10) 0px,
+          rgba(255,255,255,0.10) 7px,
+          rgba(0,0,0,0.03) 11px,
+          rgba(0,0,0,0.03) 18px
+        ),
+        linear-gradient(180deg, var(--ema-wood-1), var(--ema-wood-2));
+
+      box-shadow:
+        0 10px 18px rgba(0,0,0,0.20),
+        0 2px 6px rgba(0,0,0,0.12);
+
+      clip-path: polygon(
+        12% 0%,
+        88% 0%,
+        100% 16%,
+        100% 100%,
+        0% 100%,
+        0% 16%
+      );
+    }
+
+    /* 關掉上方圖樣 */
+    .ema::before,
+    .ema::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* 右下角熊圖 */
+    .ema .stamp {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      pointer-events: none;
+      transform: rotate(-8deg);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
+    }
+
+    .ema .name {
+      font-weight: 700;
+      margin: 10px 0 8px 0;
+    }
+
+    .ema .msg {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        margin-top: 80px;
+      }
+
+      .ema {
+        height: 200px;
+      }
+
+      .ema .stamp {
+        width: 60px;
+        height: 60px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header>
     <div>
@@ -202,104 +154,73 @@ header {
   <div id="error" class="error" style="display:none;"></div>
   <section id="grid" class="grid"></section>
 
-<script>
-  // TODO: 換成你的 Apps Script Web App URL
-  const API_URL = "https://script.google.com/macros/s/AKfycbz8EGQ_S_EEq7xgr8nlmKulP2Q68xeO4aP4vaz0tJ6L1ENIpYwtp_I-jgIPCgpvbS2QLA/exec";
-  const REFRESH_MS = 5000;
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbz8EGQ_S_EEq7xgr8nlmKulP2Q68xeO4aP4vaz0tJ6L1ENIpYwtp_I-jgIPCgpvbS2QLA/exec";
+    const REFRESH_MS = 5000;
 
-  const grid = document.getElementById('grid');
-  const statusEl = document.getElementById('status');
-  const errorEl = document.getElementById('error');
+    const grid = document.getElementById('grid');
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
 
-  function fmtTime(v) {
-  if (!v) return '';
-  const d = new Date(v);
-  if (isNaN(d.getTime())) return String(v);
-  return d.toLocaleString('zh-TW', { hour12: false });
-  }
+    function render(items) {
+      grid.innerHTML = '';
 
- function render(items) {
-  grid.innerHTML = '';
-  for (const it of items) {
-    const card = document.createElement('div');
-    card.className = 'ema';
+      for (const it of items) {
+        const card = document.createElement('div');
+        card.className = 'ema';
 
-    const nameEl = document.createElement('div');
-    nameEl.className = 'name';
-    nameEl.textContent = it.nickname ? it.nickname : '匿名';
+        const nameEl = document.createElement('div');
+        nameEl.className = 'name';
+        nameEl.textContent = it.nickname ? it.nickname : '匿名';
 
-    const msgEl = document.createElement('p');
-    msgEl.className = 'msg';
-    msgEl.textContent = it.message;
+        let msg = it.message || '';
+        if (msg.length > 50) {
+          msg = msg.slice(0, 50) + '…';
+        }
 
-    const stampEl = document.createElement('img');
-stampEl.className = 'stamp';
-stampEl.src = 'assets/bear.png';
-stampEl.alt = 'bear';
+        const msgEl = document.createElement('p');
+        msgEl.className = 'msg';
+        msgEl.textContent = msg;
 
+        const stampEl = document.createElement('img');
+        stampEl.className = 'stamp';
+        stampEl.src = 'assets/bear.png';
+        stampEl.alt = 'bear';
 
-    card.appendChild(nameEl);
-    card.appendChild(msgEl);
-    card.appendChild(stampEl);
+        card.appendChild(nameEl);
+        card.appendChild(msgEl);
+        card.appendChild(stampEl);
 
-    grid.appendChild(card);
-  }
-}
-
-
-
-  async function refresh() {
-    try {
-      statusEl.textContent = '更新中…';
-      errorEl.style.display = 'none';
-      const res = await fetch(`${API_URL}?t=${Date.now()}`, { cache: "no-store" });
-      const data = await res.json();
-
-      if (!data.ok) throw new Error(data.error || 'API returned ok=false');
-
-      render(data.items || []);
-      statusEl.textContent = `最後更新：${new Date().toLocaleTimeString('zh-TW', { hour12: false })}`;
-    } catch (err) {
-      errorEl.style.display = 'block';
-      errorEl.textContent = '載入失敗：\n' + String(err);
-      statusEl.textContent = '更新失敗';
+        grid.appendChild(card);
+      }
     }
-  }
 
-  refresh();
-  setInterval(refresh, REFRESH_MS);
-</script>
+    async function refresh() {
+      try {
+        statusEl.textContent = '更新中…';
+        errorEl.style.display = 'none';
+
+        const res = await fetch(`${API_URL}?t=${Date.now()}`, {
+          method: "GET",
+          cache: "no-store"
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'API error');
+
+        render(data.items || []);
+        statusEl.textContent = `最後更新：${new Date().toLocaleTimeString('zh-TW', { hour12: false })}`;
+      } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = '載入失敗：\n' + String(err);
+        statusEl.textContent = '更新失敗';
+      }
+    }
+
+    refresh();
+    setInterval(refresh, REFRESH_MS);
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
