@@ -21,15 +21,20 @@
     header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
+      align-items: flex-start;
     }
 
     h1 {
-      margin: 0 0 12px 0;
+      margin: 0;
       font-size: 22px;
       color: #ffffff;
       text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    /* 右上資訊區（🔥 行距在這） */
+    .info-block {
+      text-align: right;
+      line-height: 1.8; /* 🔴 行距重點 */
     }
 
     .meta,
@@ -43,13 +48,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 12px;
-      margin-top: 230px;
+      margin-top: 180px; /* 🔴 繪馬往下 */
     }
 
     .error {
       color: #b00020;
       margin-top: 12px;
-      white-space: pre-wrap;
     }
 
     :root {
@@ -61,15 +65,15 @@
 
     .ema {
       position: relative;
-      padding: 18px 16px 14px 16px;
-      height: 220px;           /* ✅ 固定高度 */
-      overflow: hidden;        /* ✅ 超出隱藏 */
+      padding: 18px 16px;
+      height: 260px;
+      overflow: hidden;
       border: 1px solid var(--ema-border);
       border-radius: 14px;
       color: var(--ema-ink);
 
       background:
-        radial-gradient(120px 80px at 20% 30%, rgba(255,255,255,0.20), rgba(255,255,255,0.00) 60%),
+        radial-gradient(120px 80px at 20% 30%, rgba(255,255,255,0.20), transparent 60%),
         repeating-linear-gradient(
           90deg,
           rgba(255,255,255,0.10) 0px,
@@ -93,45 +97,42 @@
       );
     }
 
-    /* 關掉上方圖樣 */
+    /* 關掉上方圖 */
     .ema::before,
     .ema::after {
       display: none !important;
       content: none !important;
     }
 
-    /* 右下角熊圖 */
     .ema .stamp {
       position: absolute;
       right: 6px;
       bottom: 6px;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       object-fit: contain;
-      pointer-events: none;
       transform: rotate(-8deg);
       filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
     }
 
     .ema .name {
       font-weight: 700;
-      margin: 10px 0 8px 0;
+      margin-bottom: 8px;
     }
 
     .ema .msg {
-      margin: 0;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.5;
       word-break: break-word;
     }
 
     @media (max-width: 768px) {
       .grid {
-        margin-top: 80px;
+        margin-top: 100px;
       }
 
       .ema {
-        height: 200px;
+        height: 220px;
       }
 
       .ema .stamp {
@@ -143,12 +144,17 @@
 </head>
 
 <body>
+
   <header>
     <div>
       <h1>【畢業季活動】</h1>
+    </div>
+
+    <!-- 🔴 右上資訊 -->
+    <div class="info-block">
+      <div id="status">初始化…</div>
       <div class="meta">每 5 秒更新一次，顯示最新 100 則</div>
     </div>
-    <div class="meta" id="status">初始化…</div>
   </header>
 
   <div id="error" class="error" style="display:none;"></div>
@@ -171,10 +177,10 @@
 
         const nameEl = document.createElement('div');
         nameEl.className = 'name';
-        nameEl.textContent = it.nickname ? it.nickname : '匿名';
+        nameEl.textContent = it.nickname || '匿名';
 
         let msg = it.message || '';
-        if (msg.length > 50) {
+        if (msg.length > 100) {
           msg = msg.slice(0, 100) + '…';
         }
 
@@ -185,7 +191,6 @@
         const stampEl = document.createElement('img');
         stampEl.className = 'stamp';
         stampEl.src = 'assets/bear.png';
-        stampEl.alt = 'bear';
 
         card.appendChild(nameEl);
         card.appendChild(msgEl);
@@ -200,21 +205,16 @@
         statusEl.textContent = '更新中…';
         errorEl.style.display = 'none';
 
-        const res = await fetch(`${API_URL}?t=${Date.now()}`, {
-          method: "GET",
-          cache: "no-store"
-        });
-
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+        const res = await fetch(`${API_URL}?t=${Date.now()}`, { cache: "no-store" });
         const data = await res.json();
-        if (!data.ok) throw new Error(data.error || 'API error');
+
+        if (!data.ok) throw new Error(data.error);
 
         render(data.items || []);
         statusEl.textContent = `最後更新：${new Date().toLocaleTimeString('zh-TW', { hour12: false })}`;
       } catch (err) {
         errorEl.style.display = 'block';
-        errorEl.textContent = '載入失敗：\n' + String(err);
+        errorEl.textContent = '載入失敗：\n' + err;
         statusEl.textContent = '更新失敗';
       }
     }
@@ -222,5 +222,6 @@
     refresh();
     setInterval(refresh, REFRESH_MS);
   </script>
+
 </body>
 </html>
