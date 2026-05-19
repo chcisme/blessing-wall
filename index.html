@@ -177,8 +177,8 @@
         nameEl.textContent = it.nickname ? it.nickname : '匿名';
 
         let msg = it.message || '';
-        if (msg.length > 50) {
-          msg = msg.slice(0, 100) + '…';
+        if (msg.length > 100) {
+          msg = msg.slice(0, 100);
         }
 
         const msgEl = document.createElement('p');
